@@ -1,0 +1,40 @@
+body {
+  padding-bottom: 20px;
+  background-position: 0 0;
+  background-image:  url("fondo.jpeg");
+  background-color: transparent;
+ 
+}
+
+.btn-group-vertical{
+  background-color: #f1f1f1; 
+  
+}
+
+.btn-outline-primary {
+  color:#243c74; 
+}
+
+.abs-center {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  min-height: 100vh;
+}
+
+a {
+  text-decoration: none;
+  display: inline-block;
+  padding: 8px 16px;
+}
+
+a:hover {
+  background-color: #ddd;
+  color: black;
+}
+
+.Continuar {
+  background-color: #04AA6D;
+  color: white;
+  float: right;
+}
