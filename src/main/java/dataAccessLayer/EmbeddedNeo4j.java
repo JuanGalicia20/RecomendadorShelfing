@@ -122,7 +122,7 @@ public class EmbeddedNeo4j implements AutoCloseable{
         }    
     }
     
-    public LinkedList<String> myBooksUser(String user, String pass){
+    public LinkedList<String> myBooksUser(String user){
     	try ( Session session = driver.session() )
         {
 
