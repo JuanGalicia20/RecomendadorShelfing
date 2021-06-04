@@ -11,8 +11,8 @@ $(document).ready(function(){
                 });
 
                 htmlMyBooksList += '</ul>';
-                $('#myBooks').html("");
-                $('#myBooks').html("").append(htmlMyBooksList);
+                $('#div-myBooks').html("");
+                $('#div-myBooks').html("").append(htmlMyBooksList);
             }
         } );
 });
