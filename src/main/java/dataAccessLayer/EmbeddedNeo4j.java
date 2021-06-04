@@ -132,10 +132,10 @@ public class EmbeddedNeo4j implements AutoCloseable{
                 public LinkedList<String> execute( Transaction tx )
                 {
                     Result result = tx.run("MATCH (user:User{username: \"" + user + "\"})--(book:Book) RETURN book.name");
-                    LinkedList<String> myactors = new LinkedList<String>();
+                    LinkedList<String> misLibrosU = new LinkedList<String>();
                     //System.out.println(result.list().get(0).get(0).asString());
-                   	myactors.add(result.list().get(0).get(0).asString());
-                    return myactors;
+                   	misLibrosU.add(result.get(i).get("book.name").asString());
+                    return misLibrosU;
                 }
             } );
             
