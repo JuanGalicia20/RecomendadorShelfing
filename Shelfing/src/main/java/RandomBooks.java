@@ -16,16 +16,16 @@ import org.json.simple.JSONObject;
 import dataAccessLayer.EmbeddedNeo4j;
 
 /**
- * Servlet implementation class RecServlet
+ * Servlet implementation class RandomBooks
  */
-@WebServlet("/RecServlet")
-public class RecServlet extends HttpServlet {
+@WebServlet("/RandomBooks")
+public class RandomBooks extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
     /**
      * @see HttpServlet#HttpServlet()
      */
-    public RecServlet() {
+    public RandomBooks() {
         super();
         // TODO Auto-generated constructor stub
     }
@@ -38,14 +38,12 @@ public class RecServlet extends HttpServlet {
 	 	response.setContentType("application/json");
 	 	response.setCharacterEncoding("UTF-8");
 	 	JSONObject myResponse = new JSONObject();
-	 	JSONArray booksName = new JSONArray();
 	 	
-	 	String name = request.getParameter("name");
+	 	JSONArray booksName = new JSONArray();
 	 	
 	 	 try ( EmbeddedNeo4j greeter = new EmbeddedNeo4j( "bolt://localhost:7687", "neo4j", "uvgproy123@" ) )
 	        {
-	 		 	System.out.println("Aqui llega");
-			 	LinkedList<String> books = greeter.getMyRecs(name);
+			 	LinkedList<String> books = greeter.getRandBooks();
 			 	
 			 	for (int i = 0; i < books.size(); i++) {
 			 		//System.out.println(books.get(i));
@@ -60,7 +58,7 @@ public class RecServlet extends HttpServlet {
 	 	//System.out.println(booksName.size());
 	 	myResponse.put("books", booksName);
 	 	out.println(myResponse);
-	 	out.flush(); 
+	 	out.flush();  
 	}
 
 	/**
@@ -72,4 +70,3 @@ public class RecServlet extends HttpServlet {
 	}
 
 }
-

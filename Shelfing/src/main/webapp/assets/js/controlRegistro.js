@@ -13,16 +13,17 @@ $(document).ready(function(){
         }
         else{
             if(password == pass2 && password != null){
+            
                // alert(password);
                $.ajax( {
 				
 	              type: "GET",
 	              url: '/Shelfing/RegisterServlet?user=' + user + '&user_name=' + name +'&user_email='+ email +'&user_pass='+ password,
 	              success: function(data) {
-	                alert("Result" + data.resultado);
+	                alert("Bienvenido");
 	               }
 	           } );
-        		
+        	window.open("index.html","_self")
         	}
         	else{
 	        	alert("Tu contrase\u00f1a debe coincidir");

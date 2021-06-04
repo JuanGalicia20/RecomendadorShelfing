@@ -59,4 +59,27 @@ $(document).ready(function(){
 		} );
 		window.open("recomendations.html","_self");
         });	
+        
+        $("#random").click(function(){
+            document.getElementById('booksList').innerHTML = "";
+
+            $.ajax( {
+
+                type: "GET",
+                url: '/Shelfing/RandomBooks',
+                success: function(data) {
+                    //alert("Result" + data.resultado);
+                    var htmlBooksList2 = "";
+                    $.each(data.books, function(i,item){
+                      htmlBooksList2 += '<div class="btn-group btn-group-toggle" data-toggle="buttons"><div class="btn-group btn-group-toggle px-1 py-1"><label class="btn btn-warning btn-primary">';
+					  htmlBooksList2 += '<input type="checkbox" value="'+item+'" id="checkbox'+i+'" autocomplete="off"><b <b style="font-size: 24px;">' + item + '</b></input>';
+					  htmlBooksList2 += '</label></div></div>';
+                    });
+    
+                    $('#booksList').html("");
+                    $('#booksList').append(htmlBooksList2);
+                }
+            } );
+
+        });
 });

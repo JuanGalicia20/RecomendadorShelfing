@@ -219,16 +219,52 @@ public class EmbeddedNeo4j implements AutoCloseable{
             return books;
         }
    }  
-    
+    public LinkedList<String> getRandBooks(){
+   	 try ( Session session = driver.session() )
+        {
+
+   		 LinkedList<String> books = session.readTransaction( new TransactionWork<LinkedList<String>>()
+            {
+                @Override
+                public LinkedList<String> execute( Transaction tx )
+                {
+                    Result result = tx.run( "match (:Book) with count(*) as docCount\r\n"
+                    		+ "match (b:Book)\r\n"
+                    		+ "where rand() < 20.0/docCount\r\n"
+                    		+ "return b.name limit 15");
+                    
+                    LinkedList<String> ratedBooks = new LinkedList<String>();
+                    List<Record> resultBooks = result.list();
+                    for(int j=0; j < resultBooks.size(); j++) {
+	                   	//System.out.println(resultBooks.get(j).get(i).asString());
+	                   	 ratedBooks.add(resultBooks.get(j).get("b.name").asString());
+
+                        
+                    }
+                    //for(int i =0; i < ratedBooks.size(); i++) {
+                   //	 System.out.println(ratedBooks.size());
+                   //	 System.out.println(ratedBooks.get(i));
+                   // }
+                    
+                    return ratedBooks;
+                }
+            } );
+            
+            return books;
+        }
+   }  
     public LinkedList<String> getMyRecs(String user){
       	 try ( Session session = driver.session() )
            {
 
       		 LinkedList<String> books = session.readTransaction( new TransactionWork<LinkedList<String>>()
                {
+      			 
                    @Override
                    public LinkedList<String> execute( Transaction tx )
                    {
+                	   System.out.println("Hola3");
+                	   
                        Result result = tx.run("match (u:User{username: \""+user+"\"})\r\n"
                        		+ "with u\r\n"
                        		+ "match (u)-[:read]-(b:Book)-[:is_a|published_last_edition|written_in|wrote]-(bt)\r\n"
@@ -245,7 +281,7 @@ public class EmbeddedNeo4j implements AutoCloseable{
                        System.out.println("Hola2");
                        
                        for(int i=0; i<resultBooks.size(); i++) {
-                       	System.out.println(resultBooks.get(i).get("other.name").asString());
+                       	ratedBooks.add(resultBooks.get(i).get("other.name").asString());
                        }
                        //for(int i =0; i < ratedBooks.size(); i++) {
                       //	 System.out.println(ratedBooks.size());
